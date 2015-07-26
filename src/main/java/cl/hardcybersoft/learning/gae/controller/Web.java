@@ -1,14 +1,33 @@
 package cl.hardcybersoft.learning.gae.controller;
 
-import javax.inject.Named;
+import cl.hardcybersoft.learning.gae.entity.Servicio;
 import java.io.Serializable;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
-@Named(value = "web")
+@ViewScoped
+@ManagedBean(name = "web")
 public class Web implements Serializable {
 
     private String saludo = "Holi a todos !!!";
+    private Servicio entity = new Servicio();
 
     public Web() {
+    }
+    
+    public void guardar() {
+        EntityManagerFactory emf    = Persistence.createEntityManagerFactory("gaePU");
+        EntityManager em            = emf.createEntityManager();
+        try{
+            em.persist(entity);
+            entity = new Servicio();
+        } finally {
+            em.close();            
+        }
     }
 
     public String getSaludo() {
@@ -18,6 +37,16 @@ public class Web implements Serializable {
     public void setSaludo(String saludo) {
         this.saludo = saludo;
     }
+
+    public Servicio getEntity() {
+        return entity;
+    }
+
+    public void setEntity(Servicio entity) {
+        this.entity = entity;
+    }
+    
+    
 
     @Override
     public boolean equals(Object o) {
