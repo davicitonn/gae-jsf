@@ -1,4 +1,4 @@
-package cl.hardcybersoft.learning.gae.entity;
+package com.example.gae.entity;
 
 import java.io.Serializable;
 import java.util.Objects;

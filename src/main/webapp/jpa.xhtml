@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Test JPA 2 + JSF 2.2 + CDI </title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" />
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    </h:head>
+    <h:body>
+
+        <div class="container-fluid">
+
+            <h:form>
+
+                <div class="form-group">
+                    <h:outputLabel value="ID" />
+                    <h:inputText class="form-control" id="id" readonly="true" value="#{controlador.servicio.id}" />
+                </div>
+                
+                <div class="form-group">
+                    <h:outputLabel value="Nombre" />
+                    <h:inputText class="form-control" id="nombre" value="#{controlador.servicio.nombre}" />
+                </div>
+                
+                <div class="form-group">
+                    <h:outputLabel value="Descripción" />
+                    <h:inputText class="form-control" id="descripcion" value="#{controlador.servicio.descripcion}" />
+                </div>
+                
+                <div class="botones">
+                    <h:commandButton class="btn btn-primary" action="#{controlador.guardar()}" value="Guardar" />
+                    <h:commandButton class="btn btn-default" action="#{controlador.nuevo()}" value="Nuevo" />
+                </div>
+                
+            </h:form>
+
+        </div>      
+        
+        <p:dataTable var="s" value="#{controlador.datos()}">
+            <p:column headerText="ID">
+                <h:outputText value="#{s.id}" />
+            </p:column>
+            
+            <p:column headerText="Nombre">
+                <h:outputText value="#{s.nombre}" />
+            </p:column>
+            
+            <p:column headerText="Descripción">
+                <h:outputText value="#{s.descripcion}" />
+            </p:column>
+        </p:dataTable>
+
+    </h:body>
+</html>
+

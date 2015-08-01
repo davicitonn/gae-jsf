@@ -1,65 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app
-    version="2.5"
-    xmlns="http://java.sun.com/xml/ns/javaee"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
-
-    <welcome-file-list>
-        <welcome-file>index.jsf</welcome-file>
-    </welcome-file-list>
-    
-    <!--
-       We need to set annotation lifecycyle provider manually as org.apache.myfaces.config.annotation.NoInjectionAnnotationLifecycleProvider.
-       Other providers use some classes that are restricted on Google App Engine.
-    -->
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
     <context-param>
-        <param-name>org.apache.myfaces.config.annotation.LifecycleProvider</param-name>
-        <param-value>org.apache.myfaces.config.annotation.NoInjectionAnnotationLifecycleProvider</param-value>
+        <param-name>javax.faces.PROJECT_STAGE</param-name>
+        <param-value>Development</param-value>
     </context-param>
-
+    
     <context-param>
         <param-name>org.apache.myfaces.EXPRESSION_FACTORY</param-name>
         <param-value>org.jboss.el.ExpressionFactoryImpl</param-value>
     </context-param>
-
+    
     <context-param>
-        <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
-        <param-value>client</param-value>
+        <param-name>org.apache.myfaces.config.annotation.LifecycleProvider</param-name>
+        <param-value>org.apache.myfaces.config.annotation.NoInjectionAnnotationLifecycleProvider</param-value>
     </context-param>
-
+    
     <context-param>
         <param-name>org.apache.myfaces.SECRET</param-name>
         <param-value>NzY1NDMyMTA=</param-value>
     </context-param>
-
-    <!-- Facelets configuration fragment -->
+    
     <context-param>
         <param-name>javax.faces.DEFAULT_SUFFIX</param-name>
         <param-value>.xhtml</param-value>
     </context-param>
-
+        
+    
+    <listener>
+        <listener-class>org.apache.myfaces.webapp.StartupServletContextListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>org.jboss.weld.environment.servlet.ExactListener</listener-class>
+    </listener>
+    
+    
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.jsf</url-pattern>
     </servlet-mapping>
-
-    <!-- Openwebbeans CDI
-    <listener>
-            <listener-class>org.apache.webbeans.servlet.WebBeansConfigurationListener</listener-class>
-    </listener>
-    -->
-
-    <!-- JBoss Weld 1.0.1 Compatibility
-    <listener>
-            <listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>
-    </listener>
-    -->
-
+    <welcome-file-list>
+        <welcome-file>index.jsf</welcome-file>
+    </welcome-file-list>
 </web-app>
