@@ -1,4 +1,2 @@
-appengine-skeleton
+GAE JSF 2.2 + JPA 2.0 + CDI Weld
 =============================
-
-This is a generated application from the appengine-skeleton archetype.
